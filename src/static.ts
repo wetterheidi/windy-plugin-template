@@ -4,63 +4,63 @@ import { CrossSection, EndPoint, Models } from 'src/types';
 export const crossSections: CrossSection[] = [
     {
         start: 'Genf', end: 'Zürich', windName: 'Bise',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'Westerly winds ⮕',
         bottomText: 'Bise ⬅',
         remark: 'Bise: Pressure difference of at least -4 hPa and northeasterly winds at 700 hPa'
     },
     {
         start: 'Lugano', end: 'Zürich', windName: 'Foehn',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Zürich', end: 'Stuttgart', windName: 'Foehn',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Bozen', end: 'Innsbruck', windName: 'Foehn',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Innsbruck', end: 'München', windName: 'Foehn',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Klagenfurt', end: 'Salzburg', windName: 'Foehn',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Graz', end: 'Linz', windName: 'Foehn',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Brescia', end: 'Bozen', windName: 'Ora',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'Ora ⬆',
         bottomText: 'Peler ⬇',
         remark: ''
     },
     {
         start: 'Maribor', end: 'Triest', windName: 'Bora',
-        models: ['ICON', 'ICON-D2', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         bottomText: 'Bora ⬅',
         remark: 'Bora: easterly winds and pressure differences of -4 hPa, Stormy Bora: pressure difference of -8 hPa'
     },
