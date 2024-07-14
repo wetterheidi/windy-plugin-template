@@ -57,7 +57,7 @@
     const { title, name } = config;
 
     let csIndex = 4; // set default cross section
-
+    /* Determine middle position of the cross sections */
     // https://gis.stackexchange.com/questions/123542/leafletjs-get-latlng-center-position-of-polyline
     function midPoint(src: LatLon, dst: LatLon): LatLon {
         let srcLatRad = src.lat * (Math.PI / 180);
