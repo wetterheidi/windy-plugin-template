@@ -178,6 +178,7 @@
 
     onDestroy(() => {
         windyStore.off('timestamp', timeChangedEventId);
+        openedPopup?.closePopup();
         openedPopup?.remove();
         windyMap.removeLayer(activeLine);
     });
