@@ -94,7 +94,7 @@
 
     /* Add layer for lines to the map*/
     var activeLine = L.featureGroup().addTo(windyMap);
-    let openedPopup: L.Popup | null = null;
+    let openedPopup, testPopup: L.Popup | null = null;
 
     function drawLine(start: LatLon, end: LatLon) {
         /*Delete existing line*/
@@ -107,9 +107,23 @@
             ],
             { color: 'red' },
         ).addTo(activeLine);
+
+
+        testPopup =  new L.Popup()
+                .setLatLng([start.lat, start.lon])
+                 .setContent("ejhasdpökhaspkjdhpaskö")
+
+                //  .addTo(windyMap);
+                 .addTo(activeLine);
+                 // .openOn(activeLine);
+
+        // activeLine.openPopup( [start.lat, start.lon])
+        //         .setPopupContent("slkjedfhpaskdjfpsadh")
+        //         .addTo(activeLine);
     }
 
     function popupInfo(middleLatitude: number, middleLongitude: number) {
+        openedPopup?.remove();
         /* Interpolate wind values for the selected cross section*/
         getLatLonInterpolator().then((interpolateLatLon: CoordsInterpolationFun | null) => {
             let html = csName(csIndex);
@@ -139,10 +153,14 @@
             }
 
             /*Place Popup Marker in the middle of the cross section*/
-            openedPopup = new L.Popup()
-                .setLatLng([middleLatitude, middleLongitude])
-                .setContent(html)
-                .openOn(windyMap);
+            openedPopup = activeLine.openPopup([middleLatitude, middleLongitude])
+                .setPopupContent(html)
+                // new L.Popup()
+                // .setLatLng([middleLatitude, middleLongitude])
+                // .setContent(html)
+
+                .addTo(windyMap);
+                // .openOn(windyMap);
             // windyMap.panTo([middleLatitude, middleLongitude]);
         });
     }
@@ -172,14 +190,14 @@
     onMount(() => {
         console.log('Mount');
         timeChangedEventId = windyStore.on('timestamp', () => {
-            popupInfoFor(csIndex);
+            // popupInfoFor(csIndex);
         });
     });
 
     onDestroy(() => {
         windyStore.off('timestamp', timeChangedEventId);
-        openedPopup?.closePopup();
-        openedPopup?.remove();
+        // openedPopup?.closePopup();
+        // openedPopup?.remove();
         windyMap.removeLayer(activeLine);
     });
 </script>
