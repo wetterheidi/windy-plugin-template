@@ -4,7 +4,7 @@ import { CrossSection, EndPoint, Models } from 'src/types';
 export const crossSections: CrossSection[] = [
     {
         start: 'Genf', end: 'Zürich', windName: 'Bise',
-        models: ['ICON-D2',  'ICON', 'ECMWF'],
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'Westerly winds ⮕',
         bottomText: 'Bise ⬅',
         remark: 'Bise: Pressure difference of at least -4 hPa and northeasterly winds at 700 hPa'

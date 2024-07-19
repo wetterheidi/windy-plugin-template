@@ -119,7 +119,7 @@
                 html += '<tr green-text > Do not reload this plugin.<br /> Start it again!';
             } else if (windyStore.get('overlay') !== 'wind') {
                 html +=
-                    'For sake of the simplicity, we<br />interpolate only wind values.<br />Please select wind overlay.';
+                    'Only wind is interpolated.<br />Please select wind overlay.';
             } else {
                 // Interpolated values can be either invalid (NaN, null, -1)
                 // or array of numbers
@@ -180,7 +180,8 @@
         windyStore.off('timestamp', timeChangedEventId);
         openedPopup?.remove();
         windyMap.removeLayer(activeLine);
-    });
+        openedPopup?.closePopup();
+        });
 </script>
 
 <style lang="less">
