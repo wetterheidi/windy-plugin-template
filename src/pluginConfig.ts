@@ -12,7 +12,7 @@ const config: ExternalPluginConfig = {
     mobileUI: 'fullscreen',
     routerPath: '/pressure-difference',
     desktopWidth: 800,
-    private: true,
+    private: false,
 };
 
 export default config;
