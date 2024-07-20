@@ -163,7 +163,6 @@
     onDestroy(() => {
         bcast.off('redrawFinished', listener);
         windyMap.removeLayer(activeLine);
-        openedPopup?.closePopup();
         });
 </script>
 
