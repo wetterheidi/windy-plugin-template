@@ -37,8 +37,6 @@
 </section>
 
 <script lang="ts">
-    // import { getPointForecastData } from '@windy/fetch';
-
     import bcast from '@windy/broadcast';
     import config from './pluginConfig';
     import Chart from './Chart.svelte';
@@ -59,8 +57,8 @@
 
     /* Add layer for lines to the map*/
     var activeLine = L.featureGroup().addTo(windyMap);
-    var midPointLoc:  LatLon;
-    let midPopup:     L.Popup;
+    var midPointLoc: LatLon;
+    let midPopup: L.Popup;
 
     let csIndex = 4; // set default cross section
 
@@ -103,9 +101,9 @@
             ],
             { color: 'red' },
         ).addTo(activeLine);
-        
+
         midPointLoc = midPoint(start, end);
-        midPopup = new L.Popup({ autoClose: false, closeOnClick: false, closeButton: false})
+        midPopup = new L.Popup({ autoClose: false, closeOnClick: false, closeButton: false })
             .setLatLng([midPointLoc.lat, midPointLoc.lon])
             .addTo(activeLine);
         setPopupInfo(midPointLoc);
@@ -146,24 +144,24 @@
                 } else {
                     html += 'No interpolated values available for this position';
                 }
-                const ts = new Date(windyStore.get('timestamp'));               
-                html += `<b> ${ts.toLocaleDateString('en-US')} ${ts.toLocaleTimeString('en-US')}<br /></b>`;
+                // const ts = new Date(windyStore.get('timestamp'));
+                // html += `<b> ${ts.toLocaleDateString('en-US')} ${ts.toLocaleTimeString('en-US')}<br /></b>`;
             }
             midPopup?.setContent(html);
         });
     }
 
-    let timeChangedEventId: any;
+    const listener = () => {
+        // console.log('---redrawFinished', new Date(windyStore.get('timestamp')));
+        setPopupInfo(midPointLoc);
+    };
 
     onMount(() => {
-        console.log('Mount');
-        timeChangedEventId = windyStore.on('timestamp', () => {
-            console.log(new Date(windyStore.get('timestamp')));
-            setPopupInfo(midPointLoc);
-        });
+        console.log('--Mount');
+        bcast.on('redrawFinished', listener);
     });
     onDestroy(() => {
-        windyStore.off('timestamp', timeChangedEventId);
+        bcast.off('redrawFinished', listener);
         windyMap.removeLayer(activeLine);
     });
 </script>
