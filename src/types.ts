@@ -1,7 +1,7 @@
 
 import type { LatLon } from '@windy/interfaces.d';
 
-export type Modell = 'ICON' | 'ICON-D2' | 'ECMWF' | 'AROME';
+export type Modell = 'ICON-D2' | 'ICON' | 'ECMWF' ;
 
 export type Models = Record<Modell, string>;
 

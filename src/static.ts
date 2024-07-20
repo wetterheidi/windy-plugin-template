@@ -87,6 +87,5 @@ export const nwm: Models = {
     'ECMWF': 'ecmwf',
     'ICON': 'icon',
     'ICON-D2': 'iconD2',
-    'AROME': 'arome',
 };
 

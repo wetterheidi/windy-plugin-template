@@ -168,7 +168,7 @@
             .append('path')
             .datum(lineData)
             .attr('fill', 'none')
-            .attr('stroke', 'orange')
+            .attr('stroke', 'yellow')
             .attr('stroke-width', 3)
             .attr('d', line);
 

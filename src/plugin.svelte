@@ -171,7 +171,9 @@
 
     onMount(() => {
         console.log('Mount');
+        
         timeChangedEventId = windyStore.on('timestamp', () => {
+            
             popupInfoFor(csIndex);
         });
     });
