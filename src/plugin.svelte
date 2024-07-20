@@ -29,15 +29,16 @@
                 topText={cs.topText}
                 bottomText={cs.bottomText}
             />
-                        <hr />
+            <hr />
         {/each}
-        
+
         {crossSections[csIndex].remark}
-       
     </p>
 </section>
 
 <script lang="ts">
+    // import { getPointForecastData } from '@windy/fetch';
+
     import bcast from '@windy/broadcast';
     import config from './pluginConfig';
     import Chart from './Chart.svelte';
@@ -56,8 +57,14 @@
 
     const { title, name } = config;
 
+    /* Add layer for lines to the map*/
+    var activeLine = L.featureGroup().addTo(windyMap);
+    var midPointLoc:  LatLon;
+    let midPopup:     L.Popup;
+
     let csIndex = 4; // set default cross section
-    /* Determine middle position of the cross sections */
+
+    /* Determine middle position of two coords */
     // https://gis.stackexchange.com/questions/123542/leafletjs-get-latlng-center-position-of-polyline
     function midPoint(src: LatLon, dst: LatLon): LatLon {
         let srcLatRad = src.lat * (Math.PI / 180);
@@ -88,18 +95,7 @@
         const cs = crossSections[csIndex];
         const start: LatLon = endPoints[cs.start];
         const end: LatLon = endPoints[cs.end];
-        drawLine(start, end);
-        popupInfoFor(csIndex);
-    }
-
-    /* Add layer for lines to the map*/
-    var activeLine = L.featureGroup().addTo(windyMap);
-    let openedPopup, testPopup: L.Popup | null = null;
-
-    function drawLine(start: LatLon, end: LatLon) {
-        /*Delete existing line*/
         activeLine.clearLayers();
-        /* Draw line between start and end location */
         L.polyline(
             [
                 [start.lat, start.lon],
@@ -107,27 +103,27 @@
             ],
             { color: 'red' },
         ).addTo(activeLine);
+        
+        midPointLoc = midPoint(start, end);
+        midPopup = new L.Popup({ autoClose: false, closeOnClick: false, closeButton: false})
+            .setLatLng([midPointLoc.lat, midPointLoc.lon])
+            .addTo(activeLine);
+        setPopupInfo(midPointLoc);
 
+        const bounds = new L.LatLngBounds([
+            [Math.max(start.lat, end.lat) + 0.5, Math.max(start.lon, end.lon) + 0.5],
+            [Math.min(start.lat, end.lat) - 0.5, Math.min(start.lon, end.lon) - 0.5],
+        ]);
 
-        testPopup =  new L.Popup()
-                .setLatLng([start.lat, start.lon])
-                 .setContent("ejhasdpökhaspkjdhpaskö")
-
-                //  .addTo(windyMap);
-                 .addTo(activeLine);
-                 // .openOn(activeLine);
-
-        // activeLine.openPopup( [start.lat, start.lon])
-        //         .setPopupContent("slkjedfhpaskdjfpsadh")
-        //         .addTo(activeLine);
+        /* Windy bug:  They have modified the fitBounds function to fit the map when the pane is open, but still use the original map width. So padding:[ half of pane width + your padding, your padding ].*/
+        // Wait for popup placement to finish before fitting map
+        setTimeout(() => windyMap.fitBounds(bounds, { padding: [395, 20] }), 100);
     }
 
-    function popupInfo(middleLatitude: number, middleLongitude: number) {
-        openedPopup?.remove();
+    function setPopupInfo(middle: LatLon) {
         /* Interpolate wind values for the selected cross section*/
         getLatLonInterpolator().then((interpolateLatLon: CoordsInterpolationFun | null) => {
             let html = csName(csIndex);
-            const [lat, lon] = [middleLatitude, middleLongitude];
 
             if (!interpolateLatLon) {
                 html += '<tr green-text > Do not reload this plugin.<br /> Start it again!';
@@ -137,7 +133,7 @@
             } else {
                 // Interpolated values can be either invalid (NaN, null, -1)
                 // or array of numbers
-                const interpolated = interpolateLatLon({ lat, lon });
+                const interpolated = interpolateLatLon(middle);
 
                 if (Array.isArray(interpolated)) {
                     // I everything works well, we should get raw meterological values
@@ -150,39 +146,11 @@
                 } else {
                     html += 'No interpolated values available for this position';
                 }
+                const ts = new Date(windyStore.get('timestamp'));               
+                html += `<b> ${ts.toLocaleDateString('en-US')} ${ts.toLocaleTimeString('en-US')}<br /></b>`;
             }
-
-            /*Place Popup Marker in the middle of the cross section*/
-            openedPopup = activeLine.openPopup([middleLatitude, middleLongitude])
-                .setPopupContent(html)
-                // new L.Popup()
-                // .setLatLng([middleLatitude, middleLongitude])
-                // .setContent(html)
-
-                .addTo(windyMap);
-                // .openOn(windyMap);
-            // windyMap.panTo([middleLatitude, middleLongitude]);
+            midPopup?.setContent(html);
         });
-    }
-
-    // get locations for csIndex, compute midpoint and create popup
-    function popupInfoBetween(start: LatLon, end: LatLon) {
-        let midpoint = midPoint(start, end);
-        popupInfo(midpoint.lat, midpoint.lon);
-        var bounds = new L.LatLngBounds([
-            [Math.max(start.lat, end.lat)+0.5, Math.max(start.lon, end.lon)+0.5],
-            [Math.min(start.lat, end.lat)-0.5, Math.min(start.lon, end.lon)-0.5],
-        ]);
-        // Wait for popup placement to finish before fitting map
-        /* Windy bug:  They have modified the fitBounds function to fit the map when the pane is open, but still use the original map width. So padding:[ half of pane width + your padding, your padding ].*/
-
-        setTimeout(() => windyMap.fitBounds(bounds, { padding: [395, 20] }), 100);
-    }
-
-    // get locations for csIndex, compute midpoint and create popup
-    function popupInfoFor(index: number) {
-        const cs = crossSections[index];
-        popupInfoBetween(endPoints[cs.start], endPoints[cs.end]);
     }
 
     let timeChangedEventId: any;
@@ -190,14 +158,12 @@
     onMount(() => {
         console.log('Mount');
         timeChangedEventId = windyStore.on('timestamp', () => {
-            // popupInfoFor(csIndex);
+            console.log(new Date(windyStore.get('timestamp')));
+            setPopupInfo(midPointLoc);
         });
     });
-
     onDestroy(() => {
         windyStore.off('timestamp', timeChangedEventId);
-        // openedPopup?.closePopup();
-        // openedPopup?.remove();
         windyMap.removeLayer(activeLine);
     });
 </script>
@@ -206,5 +172,4 @@
     p {
         line-height: 1.8;
     }
-
 </style>
