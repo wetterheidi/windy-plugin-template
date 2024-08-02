@@ -56,13 +56,19 @@ export const crossSections: CrossSection[] = [
         models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: 'Ora ⬆',
         bottomText: 'Peler ⬇',
-        remark: ''
+        remark: 'Pressure difference of at least +/-2 hPa'
     },
     {
         start: 'Maribor', end: 'Triest', windName: 'Bora',
         models: ['ICON-D2', 'ICON', 'ECMWF'],
         bottomText: 'Bora ⬅',
         remark: 'Bora: easterly winds and pressure differences of -4 hPa, Stormy Bora: pressure difference of -8 hPa'
+    },
+    {
+        start: 'Marseille', end: 'Lyon', windName: 'Mistral',
+        models: ['ICON-D2', 'ICON', 'ECMWF'],
+        bottomText: 'Mistral ⬇',
+        remark: 'Mistral: northerly winds and pressure differences of -5 hPa'
     },
 ];
 
@@ -81,6 +87,8 @@ export const endPoints: EndPoint = {
     Brescia: { lat: 45.436234, lon: 10.268309 },
     Maribor: { lat: 46.479444, lon: 15.684444 },
     Triest: { lat: 45.635833, lon: 13.835 },
+    Marseille: { lat: 43.438525, lon: 5.214430 },
+    Lyon: { lat: 45.723509, lon: 5.087789 },
 };
 
 export const nwm: Models = {
