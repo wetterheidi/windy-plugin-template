@@ -61,14 +61,16 @@ export const crossSections: CrossSection[] = [
     {
         start: 'Maribor', end: 'Triest', windName: 'Bora',
         models: ['ICON-D2', 'ICON', 'ECMWF'],
+        topText: '',
         bottomText: 'Bora ⬅',
         remark: 'Bora: easterly winds and pressure differences of -4 hPa, Stormy Bora: pressure difference of -8 hPa'
     },
     {
         start: 'Marseille', end: 'Lyon', windName: 'Mistral',
         models: ['ICON-D2', 'ICON', 'ECMWF'],
+        topText: '',
         bottomText: 'Mistral ⬇',
-        remark: 'Mistral: northerly winds and pressure differences of -5 hPa'
+        remark: 'Mistral: northerly winds and pressure difference of -5 hPa'
     },
 ];
 

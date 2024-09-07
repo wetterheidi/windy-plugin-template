@@ -170,4 +170,13 @@
     p {
         line-height: 1.8;
     }
+    select {
+        background-color: #6b6b6b;
+        border: none;
+        padding: 0 1em 0 0;
+        margin: 0;
+        width: auto;
+        color: white;
+        border-radius: 3px;
+    }
 </style>
