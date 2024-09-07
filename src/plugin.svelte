@@ -152,7 +152,7 @@
     }
 
     const listener = () => {
-        // console.log('---redrawFinished', new Date(windyStore.get('timestamp')));
+        console.log('---redrawFinished', new Date(windyStore.get('timestamp')));
         setPopupInfo(midPointLoc);
     };
 

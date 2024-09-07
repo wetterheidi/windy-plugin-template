@@ -4,35 +4,35 @@ import { CrossSection, EndPoint, Models } from 'src/types';
 export const crossSections: CrossSection[] = [
     {
         start: 'Genf', end: 'Zürich', windName: 'Bise',
-        models: ['ICON-D2', 'ICON', 'ECMWF'],
+        models: ['ICON-D2', 'AROME', 'ICON', 'ECMWF'],
         topText: 'Westerly winds ⮕',
         bottomText: 'Bise ⬅',
         remark: 'Bise: Pressure difference of at least -4 hPa and northeasterly winds at 700 hPa'
     },
     {
         start: 'Lugano', end: 'Zürich', windName: 'Foehn',
-        models: ['ICON-D2', 'ICON', 'ECMWF'],
+        models: ['ICON-D2', 'AROME', 'AROME', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Zürich', end: 'Stuttgart', windName: 'Foehn',
-        models: ['ICON-D2', 'ICON', 'ECMWF'],
+        models: ['ICON-D2', 'AROME', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Bozen', end: 'Innsbruck', windName: 'Foehn',
-        models: ['ICON-D2', 'ICON', 'ECMWF'],
+        models: ['ICON-D2', 'AROME', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
     },
     {
         start: 'Innsbruck', end: 'München', windName: 'Foehn',
-        models: ['ICON-D2', 'ICON', 'ECMWF'],
+        models: ['ICON-D2', 'AROME', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
@@ -53,7 +53,7 @@ export const crossSections: CrossSection[] = [
     },
     {
         start: 'Brescia', end: 'Bozen', windName: 'Ora',
-        models: ['ICON-D2', 'ICON', 'ECMWF'],
+        models: ['ICON-D2', 'AROME', 'ICON', 'ECMWF'],
         topText: 'Ora ⬆',
         bottomText: 'Peler ⬇',
         remark: 'Pressure difference of at least +/-2 hPa'
@@ -67,7 +67,7 @@ export const crossSections: CrossSection[] = [
     },
     {
         start: 'Marseille', end: 'Lyon', windName: 'Mistral',
-        models: ['ICON-D2', 'ICON', 'ECMWF'],
+        models: ['AROME', 'ALADIN', 'ICON', 'ECMWF'],
         topText: '',
         bottomText: 'Mistral ⬇',
         remark: 'Mistral: northerly winds and pressure difference of -5 hPa'
@@ -94,8 +94,11 @@ export const endPoints: EndPoint = {
 };
 
 export const nwm: Models = {
+    'ICON-D2': 'iconD2',
     'ECMWF': 'ecmwf',
     'ICON': 'icon',
-    'ICON-D2': 'iconD2',
+    'ICON-EU': 'iconEU',
+    'ALADIN': 'czeAladin',
+    'AROME': 'aromeFrance',
 };
 

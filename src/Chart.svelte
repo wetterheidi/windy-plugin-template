@@ -148,7 +148,7 @@
                 .attr('fill', 'white')
                 .text(topText);
         }
-
+        console.log('botton ' + bottomText);
         // Add text to the bottom right corner
         if (bottomText) {
             innerSvg
