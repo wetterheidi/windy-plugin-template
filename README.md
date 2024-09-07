@@ -1,15 +1,13 @@
 # Windy Plugin - Föhn Cross Sections - Alps
 
 Plugin to determine the Foehn potential along different cross sections in the alps.
-Bise and Bora are also available.
+Bise, Bora and Mistral are also available.
 
 ## Please note:
 
 Due to Windy security restrictions, the plugin is only available on the desktop versions of Windy.
 
 ## Installation:
-
-To be done
 
 * To install an update, delete the existing plugin from Windy and load the latest version.
 
