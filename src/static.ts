@@ -11,7 +11,7 @@ export const crossSections: CrossSection[] = [
     },
     {
         start: 'Lugano', end: 'Zürich', windName: 'Foehn',
-        models: ['ICON-D2', 'AROME', 'AROME', 'ICON', 'ECMWF'],
+        models: ['ICON-D2', 'AROME', 'ICON', 'ECMWF'],
         topText: 'South foehn ⬆',
         bottomText: 'North foehn ⬇',
         remark: 'Foehn: Pressure difference of at least +/-4 hPa and southerly/northerly winds of at least 20 kt at 700 hPa'
