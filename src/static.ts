@@ -59,7 +59,7 @@ export const crossSections: CrossSection[] = [
         remark: 'Pressure difference of at least +/-2 hPa'
     },
     {
-        start: 'Maribor', end: 'Triest', windName: 'Bora',
+        start: 'Triest', end: 'Maribor', windName: 'Bora',
         models: ['ICON-D2', 'ICON', 'ECMWF'],
         topText: '',
         bottomText: 'Bora ⬅',
